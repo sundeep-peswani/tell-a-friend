@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine 					on
+	RewriteBase					/taf
+
+	RewriteCond %{REQUEST_FILENAME} 			!-f
+	RewriteCond %{REQUEST_FILENAME} 			!-d
+	RewriteCond %{REQUEST_URI} 			!=/favicon.ico
+	
+	RewriteRule ^check$				index.php?view=check [L,QSA]
+	RewriteRule ^confirm/?([a-fA-F0-9]{32})$ 	index.php?view=confirm&code=$1 [L,QSA]	
+	RewriteRule ^download/?([a-fA-F0-9]{32})$	index.php?view=download&code=$1 [L,QSA]
+	RewriteRule ^dashboard/([a-fA-F0-9]{32})$ 	index.php?view=dashboard&user=$1 [L,QSA]
+	RewriteRule ^admin/view/([0-9]+)$		index.php?view=admin&user=$1 [L,QSA]
+	RewriteRule ^admin/?$				index.php?view=admin [L,QSA]
+	RewriteRule ^(.*)/(.*)$ 				index.php?view=$1 [L,QSA]
+</IfModule>
